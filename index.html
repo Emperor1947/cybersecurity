@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureVault — Authentication</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Matrix Rain Canvas -->
+  <canvas id="matrixCanvas"></canvas>
+
+  <!-- Overlay glow layer -->
+  <div class="overlay"></div>
+
+  <!-- Main Wrapper -->
+  <div class="auth-wrapper" id="authWrapper">
+
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-icon">⬡</div>
+      <span class="brand-name">SECUREVAULT</span>
+    </div>
+
+    <!-- Auth Card -->
+    <div class="auth-card" id="authCard">
+
+      <!-- Glow corners -->
+      <span class="corner tl"></span>
+      <span class="corner tr"></span>
+      <span class="corner bl"></span>
+      <span class="corner br"></span>
+
+      <!-- Tab Switcher -->
+      <div class="tab-switcher">
+        <button class="tab active" id="loginTab" onclick="switchTab('login')">LOGIN</button>
+        <button class="tab" id="registerTab" onclick="switchTab('register')">REGISTER</button>
+        <div class="tab-indicator" id="tabIndicator"></div>
+      </div>
+
+      <!-- ─── LOGIN FORM ─── -->
+      <div class="form-panel active" id="loginPanel">
+        <div class="form-title">
+          <span id="langLabel">Login</span>
+        </div>
+
+        <div class="input-group">
+          <label>IDENTIFIER</label>
+          <div class="input-wrap">
+            <span class="input-icon">◈</span>
+            <input type="text" id="loginEmail" placeholder="user@domain.com" autocomplete="off"/>
+            <span class="input-glow"></span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>PASSKEY</label>
+          <div class="input-wrap">
+            <span class="input-icon">⬡</span>
+            <input type="password" id="loginPassword" placeholder="••••••••••••" autocomplete="off"/>
+            <span class="input-glow"></span>
+          </div>
+        </div>
+
+        <!-- Error message box for login -->
+        <div class="error-box" id="loginError"></div>
+
+        <div class="form-meta">
+          <label class="checkbox-wrap">
+            <input type="checkbox"/> <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-link">Forgot passkey?</a>
+        </div>
+
+        <!-- Main CTA Button -->
+        <button class="cta-btn" id="loginBtn" onclick="handleLogin()">
+          <span class="btn-bg"></span>
+          <span class="btn-text" id="btnText">LOGIN</span>
+          <span class="btn-arrow">→</span>
+          <span class="btn-scan"></span>
+        </button>
+
+        <div class="divider"><span>OR CONTINUE WITH</span></div>
+
+        <div class="social-row">
+          <button class="social-btn">G</button>
+          <button class="social-btn">GH</button>
+          <button class="social-btn">✦</button>
+        </div>
+
+        <p class="switch-hint">No account? <a href="#" onclick="switchTab('register')">Register here</a></p>
+      </div>
+
+      <!-- ─── REGISTER FORM ─── -->
+      <div class="form-panel" id="registerPanel">
+        <div class="form-title">CREATE ACCOUNT</div>
+
+        <div class="input-group">
+          <label>FULL NAME</label>
+          <div class="input-wrap">
+            <span class="input-icon">◈</span>
+            <input type="text" id="regName" placeholder="John Doe" autocomplete="off"/>
+            <span class="input-glow"></span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>EMAIL ADDRESS</label>
+          <div class="input-wrap">
+            <span class="input-icon">@</span>
+            <input type="email" id="regEmail" placeholder="user@domain.com" autocomplete="off"/>
+            <span class="input-glow"></span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>PASSKEY</label>
+          <div class="input-wrap">
+            <span class="input-icon">⬡</span>
+            <input type="password" id="regPassword" placeholder="••••••••••••" autocomplete="off"/>
+            <span class="input-glow"></span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>CONFIRM PASSKEY</label>
+          <div class="input-wrap">
+            <span class="input-icon">⬡</span>
+            <input type="password" id="regConfirm" placeholder="••••••••••••" autocomplete="off"/>
+            <span class="input-glow"></span>
+          </div>
+        </div>
+
+        <div class="password-strength">
+          <div class="strength-bar"><span></span><span></span><span></span><span></span></div>
+          <small>Password strength</small>
+        </div>
+
+        <!-- Error / Success message box for register -->
+        <div class="error-box" id="registerError"></div>
+        <div class="success-box" id="registerSuccess"></div>
+
+        <button class="cta-btn register-btn" id="registerBtn" onclick="handleRegister()">
+          <span class="btn-bg"></span>
+          <span class="btn-text">CREATE ACCOUNT</span>
+          <span class="btn-arrow">→</span>
+          <span class="btn-scan"></span>
+        </button>
+
+        <p class="switch-hint">Already have an account? <a href="#" onclick="switchTab('login')">Sign in</a></p>
+      </div>
+
+    </div><!-- end auth-card -->
+
+    <!-- Footer -->
+    <div class="auth-footer">
+      <span>256-BIT ENCRYPTED</span>
+      <span class="dot">•</span>
+      <span>ZERO-KNOWLEDGE</span>
+      <span class="dot">•</span>
+      <span>SECURE VAULT v2.0</span>
+    </div>
+
+  </div><!-- end auth-wrapper -->
+
+  <script src="script.js"></script>
+
+</body>
+</html>

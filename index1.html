@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureVault — Upload</title>
+  <link rel="stylesheet" href="style1.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <canvas id="matrixCanvas"></canvas>
+  <div class="overlay"></div>
+
+  <nav class="topbar">
+    <div class="topbar-brand">
+      <span class="brand-icon">⬡</span>
+      <span class="brand-name">SECUREVAULT</span>
+    </div>
+    <div class="topbar-status">
+      <span class="status-dot"></span>
+      <span class="status-text">SESSION ACTIVE</span>
+    </div>
+    <div class="topbar-actions">
+      <span class="user-tag">◈ USER_001</span>
+      <a href="index.html" class="logout-btn">LOGOUT →</a>
+    </div>
+  </nav>
+
+  <div class="main-wrapper">
+
+    <div class="vault-card" id="vaultCard">
+      <span class="corner tl"></span>
+      <span class="corner tr"></span>
+      <span class="corner bl"></span>
+      <span class="corner br"></span>
+      <div class="card-scanline"></div>
+
+      <div class="card-icon-wrap">
+        <div class="hex-ring hex-ring-1"></div>
+        <div class="hex-ring hex-ring-2"></div>
+        <div class="hex-ring hex-ring-3"></div>
+        <svg class="hex-svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+          <polygon points="28,4 50,16 50,40 28,52 6,40 6,16" stroke="#00ff9f" stroke-width="1.5" fill="none" opacity="0.25"/>
+          <polygon points="28,10 44,19 44,37 28,46 12,37 12,19" stroke="#00ff9f" stroke-width="1" fill="none" opacity="0.45"/>
+          <circle cx="28" cy="28" r="6" fill="#00ff9f" opacity="0.9"/>
+          <line x1="28" y1="4"  x2="28" y2="22" stroke="#00ff9f" stroke-width="1.2" opacity="0.5"/>
+          <line x1="28" y1="34" x2="28" y2="52" stroke="#00ff9f" stroke-width="1.2" opacity="0.5"/>
+          <line x1="6"  y1="16" x2="20" y2="23" stroke="#00ff9f" stroke-width="1.2" opacity="0.5"/>
+          <line x1="36" y1="33" x2="50" y2="40" stroke="#00ff9f" stroke-width="1.2" opacity="0.5"/>
+          <line x1="6"  y1="40" x2="20" y2="33" stroke="#00ff9f" stroke-width="1.2" opacity="0.5"/>
+          <line x1="36" y1="23" x2="50" y2="16" stroke="#00ff9f" stroke-width="1.2" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <div class="card-title">SECURE UPLOAD</div>
+      <div class="card-subtitle">ENCRYPTED FILE TRANSFER PORTAL</div>
+      <div class="card-divider"></div>
+
+      <input type="file" id="fileInput" accept="image/*" style="display:none"/>
+
+      <button class="enter-btn" id="enterBtn" onclick="document.getElementById('fileInput').click()">
+        <span class="eb-bg"></span>
+        <span class="eb-scan"></span>
+        <span class="eb-content">
+          <svg class="eb-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="1" y="5" width="18" height="12" rx="1.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
+            <circle cx="6.5" cy="9.5" r="2" stroke="currentColor" stroke-width="1.2" fill="none"/>
+            <polyline points="1,15 6.5,9.5 11,12.5 14.5,8.5 19,14" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="10" y1="1" x2="10" y2="5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <polyline points="7,2.8 10,1 13,2.8" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="eb-label">ENTER PICTURE</span>
+        </span>
+        <span class="eb-arrow">↑</span>
+      </button>
+
+      <div class="preview-area" id="previewArea">
+        <div class="preview-header">
+          <span class="preview-tag">◈ IMAGE LOADED</span>
+          <button class="preview-clear" onclick="clearImage()">✕ CLEAR</button>
+        </div>
+        <div class="preview-frame">
+          <img id="previewImg" src="" alt="Preview"/>
+          <div class="preview-overlay">
+            <div class="po-corner po-tl"></div>
+            <div class="po-corner po-tr"></div>
+            <div class="po-corner po-bl"></div>
+            <div class="po-corner po-br"></div>
+          </div>
+        </div>
+        <div class="preview-meta" id="previewMeta"></div>
+        <button class="upload-btn" onclick="handleUpload()">
+          <span class="ub-bg"></span>
+          <span class="ub-scan"></span>
+          <span class="ub-text">UPLOAD &amp; ENCRYPT →</span>
+        </button>
+      </div>
+
+      <div class="card-badges">
+        <span class="badge">🔒 AES-256</span>
+        <span class="badge-dot">•</span>
+        <span class="badge">⚡ INSTANT</span>
+        <span class="badge-dot">•</span>
+        <span class="badge">◈ ZERO-KNOWLEDGE</span>
+      </div>
+    </div>
+
+    <div class="float-stat fs-left">
+      <div class="fst">VAULT STATUS</div>
+      <div class="fsv online">● ONLINE</div>
+    </div>
+    <div class="float-stat fs-right">
+      <div class="fst">ENCRYPTION</div>
+      <div class="fsv">AES-256-GCM</div>
+    </div>
+
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <span class="corner tl"></span>
+      <span class="corner tr"></span>
+      <span class="corner bl"></span>
+      <span class="corner br"></span>
+      <div class="modal-icon">✦</div>
+      <h2 class="modal-title">UPLOAD COMPLETE</h2>
+      <p class="modal-sub">Your file has been encrypted and stored securely.</p>
+      <div class="modal-code" id="modalCode">FILE_ID: ——</div>
+      <button class="modal-btn" onclick="closeModal()">
+        <span class="mb-bg"></span>
+        <span class="mb-text">CONTINUE →</span>
+      </button>
+    </div>
+  </div>
+
+  <script src="script1.js"></script>
+</body>
+</html>
